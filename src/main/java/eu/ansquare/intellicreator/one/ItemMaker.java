@@ -11,13 +11,15 @@ import java.util.List;
 
 public class ItemMaker {
     public static void createItem(String name, String texturePath, String itemGroup, @Nullable File model) {
+        String id = name.toLowerCase().replace(" ", "_").replace("-", "_");
         if(model == null){
-            generateItemModel(name);
+            generateItemModel(id);
         } else {
-            copyModel(name, model.getPath());
+            copyModel(id, model.getPath());
         }
-        copyFile(name, texturePath);
-        addItemField(name, itemGroup);
+        copyFile(id, texturePath);
+        addItemField(id, itemGroup);
+        addToLangFile(id, name);
     }
 
     private static void generateItemModel(String name) {
@@ -62,7 +64,39 @@ public class ItemMaker {
             }
         }
     }
-
+    private static void addToLangFile(String name, String langName){
+        LinkedList<String> lines = new LinkedList<>();
+        String langString = Templates.parseLangString(Templates.itemLangTemplate, name, langName);
+        String line;
+        File langFile = new File(Main.getAssetsPath() + "lang\\en_us.json");
+        try (FileInputStream inputStream = new FileInputStream(langFile)) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                while ((line = reader.readLine()) != null) {
+                    lines.add(line);
+                }
+                inputStream.close();
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int placeToAdd = lines.size() - 2;
+        lines.add(placeToAdd, langString);
+        try {
+            FileWriter myWriter = new FileWriter(langFile.getAbsoluteFile());
+            for(String writtenLine : lines){
+                myWriter.write(writtenLine);
+                myWriter.write(System.lineSeparator());
+            }
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
     private static void addItemField(String name, String itemgroup) {
         LinkedList<String> lines = new LinkedList<>();
         String unmodifiedItemString = Templates.parseStringForFile(Templates.itemFieldTemplate, name);

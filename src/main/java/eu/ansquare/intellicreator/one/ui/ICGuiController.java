@@ -4,6 +4,7 @@ import eu.ansquare.intellicreator.one.BlockMaker;
 import eu.ansquare.intellicreator.one.ItemMaker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -35,6 +36,11 @@ public class ICGuiController {
     private TextField blockItemGroupField;
     @FXML
     private Label actionResultLabel;
+    @FXML
+    public CheckBox isItemFood;
+    @FXML
+    public TextField itemHunger;
+
     private Stage stage;
 
     private File textureFile;
@@ -88,6 +94,7 @@ public class ICGuiController {
     private String finalizeBlockWithActionResult(){
         if(blocktextureFile != null && !blockNameField.getCharacters().isEmpty() && !blockItemGroupField.getCharacters().isEmpty()){
             BlockMaker.createBlock(blockNameField.getCharacters().toString(), blocktextureFile.getPath(), blockItemGroupField.getCharacters().toString().toUpperCase(), blockmodelFile);
+            if(isItemFood.isSelected())
             return "ITEM CREATED";
         }
         return "MISSING PARAMETERS";

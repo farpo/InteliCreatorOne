@@ -33,11 +33,17 @@ public class Templates {
             "    }\n" +
             "  ]\n" +
             "}";
-    public static final String itemFieldTemplate = "    public static final String %%UPITEMNAME%% = createItem(\"%%ITEMNAME%%\", \"new Item(new QuiltItemSettings())\", \"ItemGroups.%%ITEMGROUP%%\"); ";
-    public static final String blockFieldTemplate = "    public static final String %%UPITEMNAME%% = createBlock(\"%%ITEMNAME%%\", \"new Block(QuiltBlockSettings().create)\", \"ItemGroups.%%ITEMGROUP%%\"); ";
+    public static final String itemFieldTemplate = "    public static final Item %%UPITEMNAME%% = createItem(\"%%ITEMNAME%%\", new Item(new QuiltItemSettings()), ItemGroups.%%ITEMGROUP%%); ";
+    public static final String blockFieldTemplate = "    public static final Block %%UPITEMNAME%% = createBlock(\"%%ITEMNAME%%\", new Block(QuiltBlockSettings.create()), ItemGroups.%%ITEMGROUP%%); ";
+    public static final String blockLangTemplate = ",\"block.%%MODID%%.%%ITEMNAME%%\" : \"%%LANGNAME%%\"";
+    public static final String itemLangTemplate = ",\"item.%%MODID%%.%%ITEMNAME%%\" : \"%%LANGNAME%%\"";
 
     public static String parseStringForFile(String string, String name){
         String newString = string.replace("%%MODID%%", Main.getID()).replace("%%ITEMNAME%%", name).replace("%%UPITEMNAME%%", name.toUpperCase());
+        return newString;
+    }
+    public static String parseLangString(String string, String name, String langName){
+        String newString = string.replace("%%MODID%%", Main.getID()).replace("%%ITEMNAME%%", name).replace("%%LANGNAME%%", langName);
         return newString;
     }
     public static String parseBlockSettingsForFile(String string, String itemGroup){

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -26,6 +27,12 @@
                                     <TextField fx:id="itemGroupField" layoutX="133.0" layoutY="62.0" promptText="Item group" />
                                     <Button fx:id="itemtextureSelect" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" text="Choose texture" />
                                     <Button fx:id="itemModelSelect" layoutX="24.0" layoutY="62.0" mnemonicParsing="false" text="Choose model" />
+                                    <CheckBox fx:id="isItemFood" layoutX="40.0" layoutY="111.0" mnemonicParsing="false" text="Food" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <TextField fx:id="itemHunger" layoutX="133.0" layoutY="107.0" promptText="Hunger" />
                                  </children>
                               </Pane>
                            </children>

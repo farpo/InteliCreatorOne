@@ -12,7 +12,7 @@ public class Main {
         //ItemMaker.createItem("t", "C:\\Users\\Adam\\Downloads\\homs.png", "INGREDIENTS");
         //BlockMaker.createBlock("n", "C:\\Users\\Adam\\Downloads\\homs.png", "INGREDIENTS");
         //ICApplication.launch(args);
-        ICApplication.main(args);
+        ICApplication.run(args);
     }
     public static String getID(){
         return getProperties().getProperty("modid");
