@@ -40,6 +40,41 @@ public class ICGuiController {
     public CheckBox isItemFood;
     @FXML
     public TextField itemHunger;
+    //ARMOR
+    @FXML
+    public TextField armorNameField;
+    @FXML
+    public TextField armorGroupField;
+    @FXML
+    public TextField armorDurField;
+    @FXML
+    public TextField armorProtField;
+    @FXML
+    public Button createArmor;
+    @FXML
+    public Button armorTextureSelect;
+    @FXML
+    public Button helmetButton;
+    @FXML
+    public Button chestplateButton;
+    @FXML
+    public Button leggingsButton;
+    @FXML
+    public Button bootsButton;
+    @FXML
+    public CheckBox hasHelmet;
+    @FXML
+    public CheckBox hasChestplate;
+    @FXML
+    public CheckBox hasLeggings;
+    @FXML
+    public CheckBox hasBoots;
+    public File armorTexture;
+    public File helmetTexture;
+    public File chestplateTexture;
+    public File leggingsTexture;
+    public File bootsTexture;
+
 
     private Stage stage;
 
@@ -77,6 +112,32 @@ public class ICGuiController {
         });
         createBlockButton.setOnAction(event -> {
             actionResultLabel.setText(finalizeBlockWithActionResult());
+        });
+        //ARMOR
+        armorTextureSelect.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+            armorTexture = fileChooser.showOpenDialog(stage);
+        });
+        helmetButton.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+            helmetTexture = fileChooser.showOpenDialog(stage);
+        });
+        chestplateButton.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+            chestplateTexture = fileChooser.showOpenDialog(stage);
+        });
+        leggingsButton.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+            leggingsTexture = fileChooser.showOpenDialog(stage);
+        });
+        bootsButton.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+            bootsTexture = fileChooser.showOpenDialog(stage);
         });
     }
 
