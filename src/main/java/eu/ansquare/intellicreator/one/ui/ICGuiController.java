@@ -50,6 +50,14 @@ public class ICGuiController {
     @FXML
     public TextField armorProtField;
     @FXML
+    public TextField helmetNameField;
+    @FXML
+    public TextField chestNameField;
+    @FXML
+    public TextField leggingsNameField;
+    @FXML
+    public TextField bootsNameField;
+    @FXML
     public Button createArmor;
     @FXML
     public Button armorTextureSelect;
@@ -139,6 +147,9 @@ public class ICGuiController {
             fileChooser.setTitle("Open Resource File");
             bootsTexture = fileChooser.showOpenDialog(stage);
         });
+        createArmor.setOnAction(event -> {
+
+        });
     }
 
     public void setStage(Stage stage) {
@@ -156,7 +167,26 @@ public class ICGuiController {
         if(blocktextureFile != null && !blockNameField.getCharacters().isEmpty() && !blockItemGroupField.getCharacters().isEmpty()){
             BlockMaker.createBlock(blockNameField.getCharacters().toString(), blocktextureFile.getPath(), blockItemGroupField.getCharacters().toString().toUpperCase(), blockmodelFile);
             if(isItemFood.isSelected())
-            return "ITEM CREATED";
+            return "BLOCK CREATED";
+        }
+        return "MISSING PARAMETERS";
+    }
+    private String finalizeArmorWithActionResult(){
+        if(hasHelmet.isSelected() && (helmetTexture == null || helmetNameField.getCharacters().isEmpty())) {
+            return "MISSING PARAMETERS";
+        }
+        if(hasChestplate.isSelected() && (chestplateTexture == null || chestNameField.getCharacters().isEmpty())) {
+            return "MISSING PARAMETERS";
+        }
+        if(hasLeggings.isSelected() && (leggingsTexture == null || leggingsNameField.getCharacters().isEmpty())) {
+            return "MISSING PARAMETERS";
+        }
+        if(hasBoots.isSelected() && (bootsTexture == null || bootsNameField.getCharacters().isEmpty())) {
+            return "MISSING PARAMETERS";
+        }
+        if(armorTexture != null && !armorNameField.getCharacters().isEmpty() && !armorGroupField.getCharacters().isEmpty() && !armorDurField.getCharacters().isEmpty() && !armorProtField.getCharacters().isEmpty()){
+
+            return "ARMOR CREATED";
         }
         return "MISSING PARAMETERS";
     }

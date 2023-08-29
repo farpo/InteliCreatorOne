@@ -102,6 +102,10 @@
                                     </CheckBox>
                                     <TextField fx:id="armorDurField" layoutX="22.0" layoutY="128.0" prefHeight="25.0" prefWidth="70.0" promptText="Durability" />
                                     <TextField fx:id="armorProtField" layoutX="101.0" layoutY="128.0" prefHeight="25.0" prefWidth="70.0" promptText="Protection" />
+                                    <TextField fx:id="helmetNameField" layoutX="282.0" layoutY="14.0" promptText="Helmet name" />
+                                    <TextField fx:id="chestNameField" layoutX="282.0" layoutY="53.0" promptText="Chesplate name" />
+                                    <TextField fx:id="leggingsNameField" layoutX="282.0" layoutY="90.0" promptText="Leggings name" />
+                                    <TextField fx:id="bootsNameField" layoutX="282.0" layoutY="128.0" promptText="Boots name" />
                                  </children>
                               </Pane>
                            </children></AnchorPane>

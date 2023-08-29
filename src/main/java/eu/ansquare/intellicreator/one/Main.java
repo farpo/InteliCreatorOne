@@ -17,12 +17,14 @@ public class Main {
     public static String getID(){
         return getProperties().getProperty("modid");
     }
+    public static String getPackage(){return getProperties().getProperty("packagename");}
     public static String getAssetsPath(){
         return "src\\main\\resources\\assets\\" + getID() + "\\";
     }
     public static String getDataPath(){
         return "src\\main\\resources\\data\\" + getID() + "\\";
     }
+    public static String getArmorTexturePath(){return "src\\main\\resources\\assets\\minecraft\\textures\\models\\armor\\";}
     public static Properties getProperties(){
         InputStream stream = Main.class.getResourceAsStream("/icone.properties");
         Properties props = new Properties();
@@ -39,5 +41,8 @@ public class Main {
     }
     public static String getBlockClassPath(){
         return "src\\main\\java\\eu\\ansquare\\" + getProperties().getProperty("packagename") + "\\blocks\\" + getProperties().getProperty("blockclass");
+    }
+    public static String getArmorDirectoryPath(){
+        return "src\\main\\java\\eu\\ansquare\\" + getProperties().getProperty("packagename") + "\\items\\";
     }
 }
