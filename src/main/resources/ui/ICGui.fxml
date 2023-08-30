@@ -73,9 +73,9 @@
                               <Pane prefHeight="256.0" prefWidth="600.0" style="-fx-border-color: #5d586d; -fx-border-width: 5;">
                                  <children>
                                     <Button fx:id="createArmor" layoutX="257.0" layoutY="208.0" mnemonicParsing="false" text="Create armor" />
-                                    <TextField fx:id="armorNameField" layoutX="133.0" layoutY="14.0" promptText="Name" />
+                                    <TextField fx:id="armorNameField" layoutX="22.0" layoutY="14.0" promptText="Name" />
                                     <TextField fx:id="armorGroupField" layoutX="22.0" layoutY="65.0" promptText="Item group" />
-                                    <Button fx:id="armorTextureSelect" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" text="Choose texture" />
+                                    <Button fx:id="armorTextureSelect" layoutX="22.0" layoutY="166.0" mnemonicParsing="false" text="Choose body texture" />
                                     <Button fx:id="helmetButton" layoutX="525.0" layoutY="14.0" mnemonicParsing="false" text="Helmet" />
                                     <Button fx:id="chestplateButton" layoutX="516.0" layoutY="53.0" mnemonicParsing="false" text="Chestplate" />
                                     <Button fx:id="leggingsButton" layoutX="520.0" layoutY="90.0" mnemonicParsing="false" text="Leggings" />
@@ -106,6 +106,7 @@
                                     <TextField fx:id="chestNameField" layoutX="282.0" layoutY="53.0" promptText="Chesplate name" />
                                     <TextField fx:id="leggingsNameField" layoutX="282.0" layoutY="90.0" promptText="Leggings name" />
                                     <TextField fx:id="bootsNameField" layoutX="282.0" layoutY="128.0" promptText="Boots name" />
+                                    <Button fx:id="armorLayerSelect" layoutX="22.0" layoutY="208.0" mnemonicParsing="false" text="Choose layer texture" />
                                  </children>
                               </Pane>
                            </children></AnchorPane>

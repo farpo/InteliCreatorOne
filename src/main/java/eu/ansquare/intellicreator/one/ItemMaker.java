@@ -21,7 +21,12 @@ public class ItemMaker {
         addItemField(id, itemGroup);
         LangCreator.addItemToLang(name, id);
     }
-
+    public static void createArmorItem(String langName, String name, String texturePath, String itemGroup, String slot, String material){
+        generateItemModel(name);
+        copyFile(name, texturePath);
+        LangCreator.addItemToLang(langName, name);
+        addArmorItemField(name, itemGroup, slot, material);
+    }
     private static void generateItemModel(String name) {
         File itemModelFile = new File(Main.getAssetsPath() + "models\\item\\" + name + ".json");
         itemModelFile.getParentFile().mkdirs();
@@ -85,6 +90,39 @@ public class ItemMaker {
         }
         int placeToAdd = lines.size() - 2;
         lines.add(placeToAdd, modifedItemString);
+        try {
+            FileWriter myWriter = new FileWriter(itemClassFile.getAbsoluteFile());
+            for(String writtenLine : lines){
+                myWriter.write(writtenLine);
+                myWriter.write(System.lineSeparator());
+            }
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+    private static void addArmorItemField(String name, String itemgroup, String slot, String material) {
+        LinkedList<String> lines = new LinkedList<>();
+        String armorFieldString = Templates.parseArmorItemField(name, itemgroup, slot, material.toUpperCase());
+        String line;
+        File itemClassFile = new File(Main.getItemClassPath());
+        try (FileInputStream inputStream = new FileInputStream(itemClassFile)) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                while ((line = reader.readLine()) != null) {
+                    lines.add(line);
+                }
+                inputStream.close();
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int placeToAdd = lines.size() - 2;
+        lines.add(placeToAdd, armorFieldString);
         try {
             FileWriter myWriter = new FileWriter(itemClassFile.getAbsoluteFile());
             for(String writtenLine : lines){

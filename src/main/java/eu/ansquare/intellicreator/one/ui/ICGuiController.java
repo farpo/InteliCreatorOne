@@ -1,5 +1,6 @@
 package eu.ansquare.intellicreator.one.ui;
 
+import eu.ansquare.intellicreator.one.ArmorMaker;
 import eu.ansquare.intellicreator.one.BlockMaker;
 import eu.ansquare.intellicreator.one.ItemMaker;
 import javafx.fxml.FXML;
@@ -62,6 +63,8 @@ public class ICGuiController {
     @FXML
     public Button armorTextureSelect;
     @FXML
+    public Button armorLayerSelect;
+    @FXML
     public Button helmetButton;
     @FXML
     public Button chestplateButton;
@@ -78,6 +81,7 @@ public class ICGuiController {
     @FXML
     public CheckBox hasBoots;
     public File armorTexture;
+    public File armorLayer;
     public File helmetTexture;
     public File chestplateTexture;
     public File leggingsTexture;
@@ -127,6 +131,11 @@ public class ICGuiController {
             fileChooser.setTitle("Open Resource File");
             armorTexture = fileChooser.showOpenDialog(stage);
         });
+        armorLayerSelect.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+            armorLayer = fileChooser.showOpenDialog(stage);
+        });
         helmetButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open Resource File");
@@ -148,7 +157,7 @@ public class ICGuiController {
             bootsTexture = fileChooser.showOpenDialog(stage);
         });
         createArmor.setOnAction(event -> {
-
+            actionResultLabel.setText(finalizeArmorWithActionResult());
         });
     }
 
@@ -184,8 +193,10 @@ public class ICGuiController {
         if(hasBoots.isSelected() && (bootsTexture == null || bootsNameField.getCharacters().isEmpty())) {
             return "MISSING PARAMETERS";
         }
-        if(armorTexture != null && !armorNameField.getCharacters().isEmpty() && !armorGroupField.getCharacters().isEmpty() && !armorDurField.getCharacters().isEmpty() && !armorProtField.getCharacters().isEmpty()){
-
+        if(armorTexture != null && armorLayer != null && !armorNameField.getCharacters().isEmpty() && !armorGroupField.getCharacters().isEmpty() && !armorDurField.getCharacters().isEmpty() && !armorProtField.getCharacters().isEmpty()){
+            ArmorMaker.createArmor(armorNameField.getCharacters().toString(), hasHelmet.isSelected(), hasChestplate.isSelected(), hasLeggings.isSelected(), hasBoots.isSelected(),
+                    armorTexture, armorLayer, helmetTexture, chestplateTexture, leggingsTexture, bootsTexture, helmetNameField.getCharacters().toString(), chestNameField.getCharacters().toString(), leggingsNameField.getCharacters().toString(), bootsNameField.getCharacters().toString(),
+                    armorGroupField.getCharacters().toString(), armorDurField.getCharacters().toString(), armorProtField.getCharacters().toString());
             return "ARMOR CREATED";
         }
         return "MISSING PARAMETERS";
