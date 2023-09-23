@@ -21,8 +21,8 @@ public class BlockMaker {
         generateLootTable(id);
         copyFile(id, texturePath);
         addBlockField(id, itemGroup);
-        addToLangFile(id, name);
         LangCreator.addBlockToLang(name, id);
+        LangCreator.addItemToLang(name, id);
     }
     private static void generateBlockModel(String name) {
         File blockModelFile = new File(Main.getAssetsPath() + "models\\block\\" + name + ".json");

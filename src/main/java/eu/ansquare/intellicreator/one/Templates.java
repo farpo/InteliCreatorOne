@@ -35,7 +35,7 @@ public class Templates {
             "}";
     public static final String armorMaterialFieldTemplate = "    public static final ArmorMaterial %%MATERIAL%% = new %%MATERIALCLASS%%(); ";
     public static final String itemFieldTemplate = "    public static final Item %%UPITEMNAME%% = createItem(\"%%ITEMNAME%%\", new Item(new QuiltItemSettings()), ItemGroups.%%ITEMGROUP%%); ";
-    public static final String blockFieldTemplate = "    public static final Block %%UPITEMNAME%% = createBlock(\"%%ITEMNAME%%\", new Block(QuiltBlockSettings.create()), ItemGroups.%%ITEMGROUP%%); ";
+    public static final String blockFieldTemplate = "    public static final Block %%UPITEMNAME%% = createBlockAndItem(\"%%ITEMNAME%%\", new Block(QuiltBlockSettings.create()), ItemGroups.%%ITEMGROUP%%); ";
     public static final String armorItemFieldTemplate = "    public static final Item %%UPITEMNAME%% = createItem(\"%%ITEMNAME%%\", new ArmorItem(%%MATERIAL%%, ArmorItem.ArmorSlot.%%SLOT%%, new QuiltItemSettings().maxCount(1)), ItemGroups.%%ITEMGROUP%%); ";
     public static final String blockLangTemplate = ",\"block.%%MODID%%.%%ITEMNAME%%\" : \"%%LANGNAME%%\"";
     public static final String itemLangTemplate = ",\"item.%%MODID%%.%%ITEMNAME%%\" : \"%%LANGNAME%%\"";
