@@ -1,4 +1,7 @@
-package eu.ansquare.intellicreator.one;
+package eu.ansquare.intellicreator.one.lang;
+
+import eu.ansquare.intellicreator.one.Main;
+import eu.ansquare.intellicreator.one.Templates;
 
 import java.io.*;
 import java.util.LinkedList;

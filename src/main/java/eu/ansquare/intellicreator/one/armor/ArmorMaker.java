@@ -1,5 +1,8 @@
-package eu.ansquare.intellicreator.one;
+package eu.ansquare.intellicreator.one.armor;
 
+import eu.ansquare.intellicreator.one.item.ItemMaker;
+import eu.ansquare.intellicreator.one.Main;
+import eu.ansquare.intellicreator.one.Templates;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;

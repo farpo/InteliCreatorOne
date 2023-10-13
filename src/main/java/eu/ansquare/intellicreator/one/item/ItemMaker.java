@@ -1,5 +1,8 @@
-package eu.ansquare.intellicreator.one;
+package eu.ansquare.intellicreator.one.item;
 
+import eu.ansquare.intellicreator.one.lang.LangCreator;
+import eu.ansquare.intellicreator.one.Main;
+import eu.ansquare.intellicreator.one.Templates;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -7,7 +10,6 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.LinkedList;
-import java.util.List;
 
 public class ItemMaker {
     public static void createItem(String name, String texturePath, String itemGroup, @Nullable File model) {

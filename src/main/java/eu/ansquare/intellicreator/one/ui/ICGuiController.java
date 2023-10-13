@@ -1,8 +1,8 @@
 package eu.ansquare.intellicreator.one.ui;
 
-import eu.ansquare.intellicreator.one.ArmorMaker;
-import eu.ansquare.intellicreator.one.BlockMaker;
-import eu.ansquare.intellicreator.one.ItemMaker;
+import eu.ansquare.intellicreator.one.armor.ArmorMaker;
+import eu.ansquare.intellicreator.one.block.BlockMaker;
+import eu.ansquare.intellicreator.one.item.ItemMaker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
