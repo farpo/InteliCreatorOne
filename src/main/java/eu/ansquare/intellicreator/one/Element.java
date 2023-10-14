@@ -22,4 +22,7 @@ public abstract class Element {
             return groupKey;
         }
     }
+    public String toString(){
+        return ID;
+    }
 }

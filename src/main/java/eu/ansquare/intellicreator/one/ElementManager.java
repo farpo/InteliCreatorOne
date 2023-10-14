@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +21,9 @@ public class ElementManager {
         this.DIRECTORY = directory;
         elements = new HashMap<>();
         mapper = new ObjectMapper();
+    }
+    public Collection<Element> asCollection(){
+        return elements.values();
     }
     public void save(){
         for(String key : elements.keySet()){

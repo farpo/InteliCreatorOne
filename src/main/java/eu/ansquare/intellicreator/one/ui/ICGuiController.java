@@ -1,24 +1,26 @@
 package eu.ansquare.intellicreator.one.ui;
 
-import eu.ansquare.intellicreator.one.armor.ArmorMaker;
-import eu.ansquare.intellicreator.one.block.BlockMaker;
-import eu.ansquare.intellicreator.one.item.ItemMaker;
+import eu.ansquare.intellicreator.one.Element;
+import eu.ansquare.intellicreator.one.Main;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
-;import java.io.File;
+;
 
 
 public class ICGuiController {
     private Stage stage;
+    ObservableList<Element> elementObservableList = FXCollections.observableArrayList(Main.elementManager.asCollection());
+
+    @FXML
+    public ListView list;
 
     @FXML
     private void initialize() {
+        list.setItems(elementObservableList);
 
     }
 
