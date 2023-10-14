@@ -23,7 +23,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="600.0" style="-fx-border-color: #c90076; -fx-border-width: 4px;">
                <children>
-                  <ListView fx:id="list" layoutX="16.0" layoutY="4.0" prefHeight="192.0" prefWidth="569.0" stylesheets="@css/listview.css" />
+                  <ListView fx:id="list" layoutX="16.0" layoutY="4.0" prefHeight="192.0" prefWidth="569.0" />
                </children></Pane>
          </children>
       </Pane>
