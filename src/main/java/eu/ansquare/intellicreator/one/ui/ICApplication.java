@@ -1,4 +1,4 @@
-package eu.ansquare.intellicreator.one;
+package eu.ansquare.intellicreator.one.ui;
 
 import eu.ansquare.intellicreator.one.Main;
 import eu.ansquare.intellicreator.one.ui.ICGuiController;
@@ -13,12 +13,12 @@ public class ICApplication extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        //stage.setTitle("Hello World!");
-        //FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/ui/ICGui.fxml"));
-        //Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        //stage.setScene(scene);
-        //ICGuiController controller = fxmlLoader.getController();
-        //controller.setStage(stage);
-        //stage.show();
+        stage.setTitle("Hello World!");
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/ui/ICGui.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        stage.setScene(scene);
+        ICGuiController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+        stage.show();
     }
 }

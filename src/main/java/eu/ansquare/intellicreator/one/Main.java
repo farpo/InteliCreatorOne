@@ -1,5 +1,7 @@
 package eu.ansquare.intellicreator.one;
 
+import eu.ansquare.intellicreator.one.ui.ICApplication;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,8 +18,7 @@ public class Main {
         elementManager.load();
         //ItemMaker.createItem("t", "C:\\Users\\Adam\\Downloads\\homs.png", "INGREDIENTS");
         //BlockMaker.createBlock("n", "C:\\Users\\Adam\\Downloads\\homs.png", "INGREDIENTS");
-        //ICApplication.launch(args);
-        //ICApplication.run(args);
+        ICApplication.run(args);
     }
     public static String getElementPath(){
         return "icone\\elements\\";

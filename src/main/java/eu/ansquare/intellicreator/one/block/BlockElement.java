@@ -3,6 +3,7 @@ package eu.ansquare.intellicreator.one.block;
 import eu.ansquare.intellicreator.one.Element;
 import eu.ansquare.intellicreator.one.util.CollectionUtils;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class BlockElement extends Element {
@@ -10,6 +11,7 @@ public class BlockElement extends Element {
     public String texture;
     public String model;
     public Element.ItemGroup itemGroup;
+    private final String[] keys = new String[]{"name", "texture", "model"};
 
     public BlockElement(String id) {
         super(id);
@@ -36,15 +38,19 @@ public class BlockElement extends Element {
 
     @Override
     public Map<String, String> toFile() {
-        return null;
+        String type = "block";
+        Map<String, String> map = new HashMap<>();
+        map.put("type", type);
+        CollectionUtils.putAll(map, keys, name, texture, model);
+        return map;
     }
 
     @Override
     public Element fromFile(Map<String, String> inputMap) {
-        if(CollectionUtils.containsKeys(inputMap, "name", "texture", "model")){
+        if(CollectionUtils.containsKeys(inputMap, "name")){
             name = inputMap.get("name");
-            texture = inputMap.get("texture");
-            model = inputMap.get("model");
+            //texture = inputMap.get("texture");
+            //model = inputMap.get("model");
             return this;
         } else {
             throw new RuntimeException("Element misformed");
