@@ -2,28 +2,59 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.ansquare.intellicreator.one.ui.ICGuiController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.ansquare.intellicreator.one.ui.ICGuiController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #363636;">
+      <Pane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #363636;">
          <children>
-            <Pane layoutY="200.0" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #292929; -fx-border-color: #c90076; -fx-border-width: 4px;">
+            <Pane layoutY="400.0" prefHeight="400.0" prefWidth="1200.0" style="-fx-background-color: #292929; -fx-border-color: #c90076; -fx-border-width: 8px;">
                <children>
-                  <Button layoutX="30.0" layoutY="30.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: #ae0066;" text="I" />
-                  <Button layoutX="100.0" layoutY="30.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: #ae0066;" text="B" />
-                  <Button layoutX="170.0" layoutY="30.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: #ae0066;" text="A" />
-                  <Button layoutX="240.0" layoutY="30.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: #ae0066;" text="E" />
-                  <Button layoutX="310.0" layoutY="30.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: #ae0066;" text="P" />
-                  <Button layoutX="380.0" layoutY="30.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: #ae0066;" text="F" />
-                  <Button layoutX="450.0" layoutY="30.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: #ae0066;" text="T" />
-                  <Button layoutX="520.0" layoutY="30.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" style="-fx-background-color: #ae0066;" text="G" />
+                  <Button layoutX="60.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="I">
+                     <font>
+                        <Font size="40.0" />
+                     </font></Button>
+                  <Button fx:id="blockButton" layoutX="200.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="B">
+                     <font>
+                        <Font size="40.0" />
+                     </font></Button>
+                  <Button layoutX="340.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="A">
+                     <font>
+                        <Font size="40.0" />
+                     </font></Button>
+                  <Button layoutX="480.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="E">
+                     <font>
+                        <Font size="40.0" />
+                     </font></Button>
+                  <Button layoutX="610.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="P">
+                     <font>
+                        <Font size="40.0" />
+                     </font></Button>
+                  <Button layoutX="760.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="F">
+                     <font>
+                        <Font size="40.0" />
+                     </font></Button>
+                  <Button layoutX="900.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="T">
+                     <font>
+                        <Font size="40.0" />
+                     </font></Button>
+                  <Button layoutX="1040.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="G">
+                     <font>
+                        <Font size="40.0" />
+                     </font></Button>
+                  <TextField fx:id="elementId" layoutX="482.0" layoutY="219.0" prefHeight="65.0" prefWidth="236.0" promptText="Enter element id">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </TextField>
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="600.0" style="-fx-border-color: #c90076; -fx-border-width: 4px;">
+            <Pane prefHeight="400.0" prefWidth="1200.0" style="-fx-border-color: #c90076; -fx-border-width: 8px;">
                <children>
-                  <ListView fx:id="list" layoutX="16.0" layoutY="4.0" prefHeight="192.0" prefWidth="569.0" />
+                  <ListView fx:id="list" layoutX="32.0" layoutY="8.0" prefHeight="384.0" prefWidth="1138.0" />
                </children></Pane>
          </children>
       </Pane>

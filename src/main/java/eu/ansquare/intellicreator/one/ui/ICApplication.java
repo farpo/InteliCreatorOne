@@ -15,7 +15,7 @@ public class ICApplication extends Application {
     public void start(Stage stage) throws Exception {
         stage.setTitle("Hello World!");
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/ui/ICGui.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("/ui/css/style.css").toExternalForm());
         ICGuiController controller = fxmlLoader.getController();
