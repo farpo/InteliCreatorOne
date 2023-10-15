@@ -1,6 +1,5 @@
 package eu.ansquare.intellicreator.one.item;
 
-import eu.ansquare.intellicreator.one.lang.LangCreator;
 import eu.ansquare.intellicreator.one.Main;
 import eu.ansquare.intellicreator.one.Templates;
 import org.jetbrains.annotations.Nullable;
@@ -21,12 +20,10 @@ public class ItemMaker {
         }
         copyFile(id, texturePath);
         addItemField(id, itemGroup);
-        LangCreator.addItemToLang(name, id);
     }
     public static void createArmorItem(String langName, String name, String texturePath, String itemGroup, String slot, String material){
         generateItemModel(name);
         copyFile(name, texturePath);
-        LangCreator.addItemToLang(langName, name);
         addArmorItemField(name, itemGroup, slot, material);
     }
     private static void generateItemModel(String name) {

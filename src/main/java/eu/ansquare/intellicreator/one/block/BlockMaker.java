@@ -1,7 +1,6 @@
 package eu.ansquare.intellicreator.one.block;
 
 import eu.ansquare.intellicreator.one.Element;
-import eu.ansquare.intellicreator.one.lang.LangCreator;
 import eu.ansquare.intellicreator.one.Main;
 import eu.ansquare.intellicreator.one.Templates;
 import eu.ansquare.intellicreator.one.template.BlockTemplates;
@@ -41,6 +40,7 @@ public class BlockMaker {
             copyModelFile(element.ID, element.model);
         }
         addToLangFile(element.ID, element.name);
+        addSimpleBlockField(element.ID, element.itemGroup);
     }
     private static void generateBlockModel(String id) {
         File blockModelFile = new File(Main.getAssetsPath() + "models\\block\\" + id + ".json");
@@ -152,5 +152,37 @@ public class BlockMaker {
             e.printStackTrace();
         }
     }
-
+    private static void addSimpleBlockField(String id, Element.ItemGroup itemgroup) {
+        LinkedList<String> lines = new LinkedList<>();
+        String field = BlockTemplates.genSimpleBlockField(id, itemgroup);
+        String line;
+        File itemClassFile = new File(Main.getBlockClassPath());
+        try (FileInputStream inputStream = new FileInputStream(itemClassFile)) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                while ((line = reader.readLine()) != null) {
+                    lines.add(line);
+                }
+                inputStream.close();
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int placeToAdd = lines.size() - 2;
+        lines.add(placeToAdd, field);
+        try {
+            FileWriter myWriter = new FileWriter(itemClassFile.getAbsoluteFile());
+            for(String writtenLine : lines){
+                myWriter.write(writtenLine);
+                myWriter.write(System.lineSeparator());
+            }
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
 }

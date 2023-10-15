@@ -1,5 +1,6 @@
 package eu.ansquare.intellicreator.one.template;
 
+import eu.ansquare.intellicreator.one.Element;
 import eu.ansquare.intellicreator.one.Main;
 
 public class BlockTemplates {
@@ -47,5 +48,9 @@ public class BlockTemplates {
                 "  ]\n" +
                 "}";
         return t.replace("%DROPID", droppedId).replace("%DROPMODID", droppedModId);
+    }
+    public static String genSimpleBlockField(String id, Element.ItemGroup itemGroup) {
+        String t = "    public static final Block %UPID = %METHOD(\"%ID\", new Block(QuiltBlockSettings.create()), ItemGroups.%ITEMGROUP); ";
+        return t.replace("%ID", id).replace("%UPID", id.toUpperCase()).replace("%ITEMGROUP", itemGroup.key().toUpperCase()).replace("%METHOD", Main.getProperties().getProperty("blockitemmethod"));
     }
 }
