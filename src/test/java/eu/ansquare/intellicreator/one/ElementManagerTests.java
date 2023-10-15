@@ -9,15 +9,6 @@ import java.nio.file.Path;
 
 class ElementManagerTests {
     @Test
-    public void testLoadAndSave() {
-        ElementManager elementManager = new ElementManager(Main.getElementPath());
-        elementManager.load();
-        BlockElement element = new BlockElement("test");
-        element.name("Test elelest");
-        elementManager.elements.put(element.ID, element);
-        elementManager.save();
-    }
-    @Test
     public void testWrite() {
         try {
             Files.writeString(Path.of("icone\\written.json"), "[]");

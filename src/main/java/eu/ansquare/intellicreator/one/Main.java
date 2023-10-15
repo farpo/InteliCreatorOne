@@ -16,8 +16,6 @@ public class Main {
         System.out.println("Hello world!");
         elementManager = new ElementManager(getElementPath());
         elementManager.load();
-        //ItemMaker.createItem("t", "C:\\Users\\Adam\\Downloads\\homs.png", "INGREDIENTS");
-        //BlockMaker.createBlock("n", "C:\\Users\\Adam\\Downloads\\homs.png", "INGREDIENTS");
         ICApplication.run(args);
     }
     public static String getElementPath(){
