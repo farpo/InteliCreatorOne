@@ -30,22 +30,40 @@ public class ICGuiController extends GuiController {
     public Label redId;
     @FXML
     public Button blockButton;
+    @FXML
+    public Button itemButton;
 
     @FXML
     private void initialize() throws IOException {
         redId.setVisible(false);
         elementId.setOnMouseClicked(event -> redId.setVisible(false));
         FXMLLoader blockUiFxmlLoader = new FXMLLoader(Main.class.getResource("/ui/BlockGui.fxml"));
-        Scene scene = new Scene(blockUiFxmlLoader.load());
+        Scene blockScene = new Scene(blockUiFxmlLoader.load());
+        FXMLLoader itemUiFxmlLoader = new FXMLLoader(Main.class.getResource("/ui/ItemGui.fxml"));
+        Scene itemScene = new Scene(itemUiFxmlLoader.load());
         blockButton.setOnMouseClicked(event -> {
             if (!elementId.getCharacters().isEmpty()) {
                 Stage blockStage = new Stage();
                 blockStage.initOwner(blockButton.getScene().getWindow());
-                blockStage.setScene(scene);
+                blockStage.setScene(blockScene);
                 BlockController controller = blockUiFxmlLoader.getController();
                 controller.setStage(blockStage);
                 controller.setId(elementId.getCharacters().toString());
-                // showAndWait will block execution until the window closes...
+                blockStage.showAndWait();
+                elementObservableList.removeAll(Main.elementManager.asCollection());
+                elementObservableList.addAll(Main.elementManager.asCollection());
+            } else {
+                redId.setVisible(true);
+            }
+        });
+        itemButton.setOnMouseClicked(event -> {
+            if (!elementId.getCharacters().isEmpty()) {
+                Stage blockStage = new Stage();
+                blockStage.initOwner(itemButton.getScene().getWindow());
+                blockStage.setScene(itemScene);
+                ItemController controller = itemUiFxmlLoader.getController();
+                controller.setStage(blockStage);
+                controller.setId(elementId.getCharacters().toString());
                 blockStage.showAndWait();
                 elementObservableList.removeAll(Main.elementManager.asCollection());
                 elementObservableList.addAll(Main.elementManager.asCollection());

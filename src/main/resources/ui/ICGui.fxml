@@ -14,7 +14,7 @@
          <children>
             <Pane layoutY="400.0" prefHeight="400.0" prefWidth="1200.0" style="-fx-background-color: #292929; -fx-border-color: #c90076; -fx-border-width: 8px;">
                <children>
-                  <Button layoutX="60.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="I">
+                  <Button fx:id="itemButton" layoutX="60.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="I">
                      <font>
                         <Font size="40.0" />
                      </font></Button>

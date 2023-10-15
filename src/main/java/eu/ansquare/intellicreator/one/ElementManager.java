@@ -2,6 +2,7 @@ package eu.ansquare.intellicreator.one;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.ansquare.intellicreator.one.block.BlockElement;
+import eu.ansquare.intellicreator.one.item.ItemElement;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,6 +80,9 @@ public class ElementManager {
                     switch (type){
                         case "block":
                             element = new BlockElement(name);
+                            break;
+                        case "item":
+                            element = new ItemElement(name);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized type");

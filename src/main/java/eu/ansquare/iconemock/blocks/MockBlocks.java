@@ -48,5 +48,6 @@ public class MockBlocks {
     public static final Block OID = createBlockAndItem("oid", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
     public static final Block ONNOD = createBlockAndItem("onnod", new Block(QuiltBlockSettings.create()), ItemGroups.COMBAT); 
     public static final Block FD = createBlockAndItem("fd", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block D = createBlockAndItem("d", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
 
 */}
