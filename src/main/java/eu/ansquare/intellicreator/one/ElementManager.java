@@ -14,12 +14,11 @@ public class ElementManager {
     private ObjectMapper mapper;
     public final String DIRECTORY;
     public Map<String, Element> elements;
-    public Set<String> written;
-    public ElementManager(String directory){
+    public List<String> written;
+    public ElementManager(String directory) {
         this.DIRECTORY = directory;
         elements = new HashMap<>();
         mapper = new ObjectMapper();
-        written = new HashSet<>();
     }
     public Collection<Element> asCollection(){
         return elements.values();
@@ -41,7 +40,14 @@ public class ElementManager {
                 written.add(key);
             }
         }
+        try {
+            String outputFromMap = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(written);
+            Files.writeString(Paths.get("icone//written.json"), outputFromMap);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
     public void save(){
         for(String key : elements.keySet()){
             Element element = elements.get(key);
@@ -57,6 +63,11 @@ public class ElementManager {
     }
 
     public void load(){
+        try {
+            written = mapper.readValue(Files.readAllBytes(Path.of("icone//written.json")), ArrayList.class);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         File directory = Path.of(DIRECTORY).toAbsolutePath().toFile();
         try {
             if(directory.isDirectory()) {
