@@ -24,8 +24,7 @@ public class BlockTemplates {
     }
     public static String genItemModel(String id){
         String t = "{\"parent\": \"%MODID:block/%ID\"}";;
-        t.replace("%ID", id).replace("%MODID", Main.getID());
-        return t;
+        return t.replace("%ID", id).replace("%MODID", Main.getID());
     }
     public static String getLootTable(String id, String droppedId, String droppedModId){
         String t ="{\n" +
