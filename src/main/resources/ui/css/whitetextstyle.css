@@ -22,3 +22,12 @@
     -fx-background-radius: 3, 2, 4, 0;
     -fx-prompt-text-fill: transparent;
 }
+.choice-box {
+  -fx-background-color : #c90076; /* Cadet Blue */
+  -fx-text-fill : white;
+  -fx-font-family : sans-serif;
+  -fx-font-size : 12;
+  -fx-font-style : normal;
+}
+
+

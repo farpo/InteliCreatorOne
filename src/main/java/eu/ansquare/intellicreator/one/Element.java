@@ -11,15 +11,21 @@ public abstract class Element {
     public abstract Map<String, String> toFile();
     public abstract Element fromFile(Map<String,String> inputMap);
     public enum ItemGroup{
-        BUILDING_BLOCKS("building_blocks"),
-        COMBAT("combat");
+        BUILDING_BLOCKS("building_blocks", "Building blocks"),
+        COMBAT("combat", "Combat");
 
         private final String groupKey;
-        ItemGroup(String key){
+        private final String label;
+
+        ItemGroup(String key, String label){
             this.groupKey = key;
+            this.label = label;
         }
         public String key() {
             return groupKey;
+        }
+        public String toString(){
+            return label;
         }
     }
     public String toString(){

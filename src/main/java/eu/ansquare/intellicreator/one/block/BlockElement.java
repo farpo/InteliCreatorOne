@@ -11,7 +11,7 @@ public class BlockElement extends Element {
     public String texture;
     public String model;
     public Element.ItemGroup itemGroup;
-    private final String[] keys = new String[]{"name", "texture", "model"};
+    private final String[] keys = new String[]{"name", "texture", "model", "itemgroup"};
 
     public BlockElement(String id) {
         super(id);
@@ -41,7 +41,7 @@ public class BlockElement extends Element {
         String type = "block";
         Map<String, String> map = new HashMap<>();
         map.put("type", type);
-        CollectionUtils.putAll(map, keys, name, texture, model);
+        CollectionUtils.putAll(map, keys, name, texture, model, itemGroup.key());
         return map;
     }
 
@@ -49,8 +49,9 @@ public class BlockElement extends Element {
     public Element fromFile(Map<String, String> inputMap) {
         if(CollectionUtils.containsKeys(inputMap, "name")){
             name = inputMap.get("name");
-            //texture = inputMap.get("texture");
-            //model = inputMap.get("model");
+            texture = inputMap.get("texture");
+            model = inputMap.get("model");
+            itemGroup = ItemGroup.valueOf(inputMap.get("itemgroup").toUpperCase());
             return this;
         } else {
             throw new RuntimeException("Element misformed");
