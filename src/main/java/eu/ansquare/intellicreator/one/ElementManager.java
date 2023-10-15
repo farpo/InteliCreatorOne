@@ -8,22 +8,39 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ElementManager {
     private ObjectMapper mapper;
     public final String DIRECTORY;
     public Map<String, Element> elements;
+    public Set<String> written;
     public ElementManager(String directory){
         this.DIRECTORY = directory;
         elements = new HashMap<>();
         mapper = new ObjectMapper();
+        written = new HashSet<>();
     }
     public Collection<Element> asCollection(){
         return elements.values();
+    }
+    public boolean add(Element element){
+        if(elements.containsKey(element.ID)){
+            return false;
+        }
+        elements.put(element.ID, element);
+        write();
+        save();
+        return true;
+    }
+    public void write(){
+        for(String key : elements.keySet()){
+            if(!written.contains(key)){
+                Element element = elements.get(key);
+                element.write();
+                written.add(key);
+            }
+        }
     }
     public void save(){
         for(String key : elements.keySet()){

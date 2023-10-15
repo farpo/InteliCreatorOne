@@ -3,6 +3,7 @@ package eu.ansquare.intellicreator.one.ui;
 import com.sun.glass.ui.CommonDialogs;
 import eu.ansquare.intellicreator.one.Element;
 import eu.ansquare.intellicreator.one.Main;
+import eu.ansquare.intellicreator.one.block.BlockElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.nio.file.Path;
 
 public class BlockController extends GuiController{
     ObservableList<Element.ItemGroup> itemGroupObservableList = FXCollections.observableArrayList(Element.ItemGroup.values());
@@ -68,6 +70,8 @@ public class BlockController extends GuiController{
                 }
             }
         });
+        itemGroup.setOnMouseClicked(event -> redItemGroup.setVisible(false));
+        customName.setOnMouseClicked(event -> redCustomName.setVisible(false));
         chooseModel.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select the model");
@@ -79,17 +83,13 @@ public class BlockController extends GuiController{
         saveButton.setOnMouseClicked(event -> save());
     }
     private void save(){
-        if(texture == null){
-            redTexture.setVisible(true);
-        }
-        if(model == null){
-            redModel.setVisible(true);
-        }
-        if(customName.getCharacters().isEmpty()){
-            redCustomName.setVisible(true);
-        }
-        if(itemGroup.getSelectionModel().getSelectedItem() == null){
-            redItemGroup.setVisible(true);
+
+        redTexture.setVisible(texture == null);
+        redCustomName.setVisible(customName.getCharacters().isEmpty());
+        redItemGroup.setVisible(itemGroup.getSelectionModel().getSelectedItem() == null);
+        if(!redCustomName.isVisible() && !redTexture.isVisible() && !redItemGroup.isVisible()){
+            BlockElement element = new BlockElement(this.id).group(itemGroup.getSelectionModel().getSelectedItem()).model(model).texture(texture).name(customName.getCharacters().toString());
+            Main.elementManager.add(element);
         }
     }
 }

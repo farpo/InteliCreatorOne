@@ -1,8 +1,10 @@
 package eu.ansquare.intellicreator.one.block;
 
+import eu.ansquare.intellicreator.one.Element;
 import eu.ansquare.intellicreator.one.lang.LangCreator;
 import eu.ansquare.intellicreator.one.Main;
 import eu.ansquare.intellicreator.one.Templates;
+import eu.ansquare.intellicreator.one.template.BlockTemplates;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -13,81 +15,81 @@ import java.util.LinkedList;
 
 public class BlockMaker {
     public static void createBlock(String name, String texturePath, String itemGroup, @Nullable File model) {
-        String id = name.toLowerCase().replace(" ", "_").replace("-", "_");
-        if(model == null){
-            generateBlockModel(id);
-        } else {
-            copyModel(id, model.getPath());
-        }
-        generateBlockstate(id);
-        generateBlockItemModel(id);
-        generateLootTable(id);
-        copyFile(id, texturePath);
-        addBlockField(id, itemGroup);
-        addToLangFile(id, name);
-        LangCreator.addBlockToLang(name, id);
+//        String id = name.toLowerCase().replace(" ", "_").replace("-", "_");
+//        if(model == null){
+//            generateBlockModel(id);
+//        } else {
+//            copyModel(id, model.getPath());
+//        }
+//        generateBlockstate(id);
+//        generateBlockItemModel(id);
+//        generateLootTable(id);
+//        copyFile(id, texturePath);
+//        addBlockField(id, itemGroup);
+//        addToLangFile(id, name);
+//        LangCreator.addBlockToLang(name, id);
     }
-    private static void generateBlockModel(String name) {
-        File blockModelFile = new File(Main.getAssetsPath() + "models\\block\\" + name + ".json");
+    public static void writeBlockElement(BlockElement element, boolean hasDefaultField){
+        generateBlockstate(element.ID);
+        generateBlockItemModel(element.ID);
+        generateLootTable(element.ID, Main.getID(), element.ID);
+        copyTextureFile(element.ID, element.texture);
+        if(element.model.equalsIgnoreCase("default")){
+            generateBlockModel(element.ID);
+        } else{
+            copyModelFile(element.ID, element.model);
+        }
+
+    }
+    private static void generateBlockModel(String id) {
+        File blockModelFile = new File(Main.getAssetsPath() + "models\\block\\" + id + ".json");
         blockModelFile.getParentFile().mkdirs();
-        System.out.println(blockModelFile.getAbsolutePath());
         try {
-            FileWriter myWriter = new FileWriter(blockModelFile.getAbsoluteFile());
-            myWriter.write(Templates.parseStringForFile(Templates.blockModelTemplate, name));
-            myWriter.close();
+            Files.writeString(blockModelFile.toPath(), BlockTemplates.genModel(id));
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-    private static void generateBlockstate(String name) {
-        File blockstateFile = new File(Main.getAssetsPath() + "blockstates\\" + name + ".json");
+    private static void generateBlockstate(String id) {
+        File blockstateFile = new File(Main.getAssetsPath() + "blockstates\\" + id + ".json");
         blockstateFile.getParentFile().mkdirs();
-        System.out.println(blockstateFile.getAbsolutePath());
         try {
-            FileWriter myWriter = new FileWriter(blockstateFile.getAbsoluteFile());
-            myWriter.write(Templates.parseStringForFile(Templates.blockstateTemplate, name));
-            myWriter.close();
+            Files.writeString(blockstateFile.toPath(), BlockTemplates.genBlockState(id));
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-    private static void generateBlockItemModel(String name) {
-        File itemModelFile = new File(Main.getAssetsPath() + "models\\item\\" + name + ".json");
+    private static void generateBlockItemModel(String id) {
+        File itemModelFile = new File(Main.getAssetsPath() + "models\\item\\" + id + ".json");
         itemModelFile.getParentFile().mkdirs();
-        System.out.println(itemModelFile.getAbsolutePath());
         try {
-            FileWriter myWriter = new FileWriter(itemModelFile.getAbsoluteFile());
-            myWriter.write(Templates.parseStringForFile(Templates.blockItemModelTemplate, name));
-            myWriter.close();
+            Files.writeString(itemModelFile.toPath(), BlockTemplates.genItemModel(id));
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-    private static void generateLootTable(String name) {
-        File lootTableFile = new File(Main.getDataPath() + "loot_tables\\blocks\\" + name + ".json");
+    private static void generateLootTable(String id, String droppedModId, String droppedId) {
+        File lootTableFile = new File(Main.getDataPath() + "loot_tables\\blocks\\" + id + ".json");
         lootTableFile.getParentFile().mkdirs();
-        System.out.println(lootTableFile.getAbsolutePath());
         try {
-            FileWriter myWriter = new FileWriter(lootTableFile.getAbsoluteFile());
-            myWriter.write(Templates.parseStringForFile(Templates.lootTableTemplate, name));
-            myWriter.close();
+            Files.writeString(lootTableFile.toPath(), BlockTemplates.getLootTable(id, droppedId, droppedModId));
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-    private static void copyFile(String name, String texturePath){
-        File textureFileParent = new File(Main.getAssetsPath() + "textures\\block\\" + name + ".png").getParentFile();
+    private static void copyTextureFile(String id, String texturePath){
+        File textureFileParent = new File(Main.getAssetsPath() + "textures\\block\\" + id + ".png").getParentFile();
         textureFileParent.mkdirs();
         try {
-            Files.copy(Path.of(texturePath).toAbsolutePath(), Path.of(Main.getAssetsPath() + "textures\\block\\" + name + ".png").toAbsolutePath());
+            Files.copy(Path.of(texturePath).toAbsolutePath(), Path.of(Main.getAssetsPath() + "textures\\block\\" + id + ".png").toAbsolutePath());
         } catch (IOException e) {
             if(e instanceof FileAlreadyExistsException){
                 System.out.println("Block texture already exists");
@@ -98,11 +100,11 @@ public class BlockMaker {
             }
         }
     }
-    private static void copyModel(String name, String modelPath){
-        File textureFileParent = new File(Main.getAssetsPath() + "models\\block\\" + name + ".json").getParentFile();
+    private static void copyModelFile(String id, String modelPath){
+        File textureFileParent = new File(Main.getAssetsPath() + "models\\block\\" + id + ".json").getParentFile();
         textureFileParent.mkdirs();
         try {
-            Files.copy(Path.of(modelPath).toAbsolutePath(), Path.of(Main.getAssetsPath() + "models\\block\\" + name + ".json").toAbsolutePath());
+            Files.copy(Path.of(modelPath).toAbsolutePath(), Path.of(Main.getAssetsPath() + "models\\block\\" + id + ".json").toAbsolutePath());
         } catch (IOException e) {
             if(e instanceof FileAlreadyExistsException){
                 System.out.println("Block model already exists");

@@ -13,4 +13,10 @@ class ElementManagerTests {
         elementManager.elements.put(element.ID, element);
         elementManager.save();
     }
+    @Test
+    public void testWrite() {
+        ElementManager elementManager = new ElementManager(Main.getElementPath());
+        elementManager.load();
+        elementManager.write();
+    }
 }

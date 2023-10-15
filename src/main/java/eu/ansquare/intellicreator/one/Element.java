@@ -10,6 +10,7 @@ public abstract class Element {
     public abstract String icon();
     public abstract Map<String, String> toFile();
     public abstract Element fromFile(Map<String,String> inputMap);
+    public abstract void write();
     public enum ItemGroup{
         BUILDING_BLOCKS("building_blocks", "Building blocks"),
         COMBAT("combat", "Combat");

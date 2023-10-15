@@ -25,4 +25,9 @@ public class ItemElement extends Element {
 
     }
 
+    @Override
+    public void write() {
+
+    }
+
 }

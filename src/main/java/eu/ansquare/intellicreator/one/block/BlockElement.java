@@ -3,6 +3,7 @@ package eu.ansquare.intellicreator.one.block;
 import eu.ansquare.intellicreator.one.Element;
 import eu.ansquare.intellicreator.one.util.CollectionUtils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,12 +21,16 @@ public class BlockElement extends Element {
         this.name = name;
         return this;
     }
-    public BlockElement texture(String texture){
-        this.texture = texture;
+    public BlockElement texture(File texture){
+        this.texture = texture.getAbsolutePath();
         return this;
     }
-    public BlockElement model(String model){
-        this.model = model;
+    public BlockElement model(File model){
+        if(model == null){
+            this.model = "default";
+        } else {
+            this.model = model.getAbsolutePath();
+        }
         return this;
     }
     public BlockElement group(Element.ItemGroup group){
@@ -56,5 +61,10 @@ public class BlockElement extends Element {
         } else {
             throw new RuntimeException("Element misformed");
         }
+    }
+
+    @Override
+    public void write() {
+        BlockMaker.writeBlockElement(this, true);
     }
 }

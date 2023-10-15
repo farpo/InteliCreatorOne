@@ -2,16 +2,16 @@ package eu.ansquare.intellicreator.one;
 
 public class Templates {
     public static final String itemModelTemplate = "{\"parent\": \"minecraft:item/generated\",\"textures\": {\"layer0\": \"%%MODID%%:item/%%ITEMNAME%%\"}}";
-    public static final String blockItemModelTemplate = "{\"parent\": \"%%MODID%%:block/%%ITEMNAME%%\"}";
+    public static final String blockItemModelTemplate = "{\"parent\": \"%MODID:block/%ID\"}";
     public static final String blockModelTemplate = "{\n" +
             "  \"parent\": \"block/cube_all\",\n" +
             "  \"textures\": {\n" +
-            "    \"all\": \"%%MODID%%:block/%%ITEMNAME%%\"\n" +
+            "    \"all\": \"%ID:block/%ID\"\n" +
             "  }\n" +
             "}";
     public static final String blockstateTemplate = "{\n" +
             "  \"variants\": {\n" +
-            "    \"\": { \"model\": \"%%MODID%%:block/%%ITEMNAME%%\" }\n" +
+            "    \"\": { \"model\": \"%MODID:block/%ID\" }\n" +
             "  }\n" +
             "}";
     public static final String lootTableTemplate = "{\n" +
@@ -35,7 +35,7 @@ public class Templates {
             "}";
     public static final String armorMaterialFieldTemplate = "    public static final ArmorMaterial %%MATERIAL%% = new %%MATERIALCLASS%%(); ";
     public static final String itemFieldTemplate = "    public static final Item %%UPITEMNAME%% = createItem(\"%%ITEMNAME%%\", new Item(new QuiltItemSettings()), ItemGroups.%%ITEMGROUP%%); ";
-    public static final String blockFieldTemplate = "    public static final Block %%UPITEMNAME%% = createBlock(\"%%ITEMNAME%%\", new Block(QuiltBlockSettings.create()), ItemGroups.%%ITEMGROUP%%); ";
+    public static final String blockFieldTemplate = "    public static final Block %UPID = createBlock(\"%ID\", new Block(QuiltBlockSettings.create()), ItemGroups.%ITEMGROUP); ";
     public static final String armorItemFieldTemplate = "    public static final Item %%UPITEMNAME%% = createItem(\"%%ITEMNAME%%\", new ArmorItem(%%MATERIAL%%, ArmorItem.ArmorSlot.%%SLOT%%, new QuiltItemSettings().maxCount(1)), ItemGroups.%%ITEMGROUP%%); ";
     public static final String blockLangTemplate = ",\"block.%%MODID%%.%%ITEMNAME%%\" : \"%%LANGNAME%%\"";
     public static final String itemLangTemplate = ",\"item.%%MODID%%.%%ITEMNAME%%\" : \"%%LANGNAME%%\"";
