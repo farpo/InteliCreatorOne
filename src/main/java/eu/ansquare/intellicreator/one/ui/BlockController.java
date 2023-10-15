@@ -83,13 +83,13 @@ public class BlockController extends GuiController{
         saveButton.setOnMouseClicked(event -> save());
     }
     private void save(){
-
         redTexture.setVisible(texture == null);
         redCustomName.setVisible(customName.getCharacters().isEmpty());
         redItemGroup.setVisible(itemGroup.getSelectionModel().getSelectedItem() == null);
         if(!redCustomName.isVisible() && !redTexture.isVisible() && !redItemGroup.isVisible()){
             BlockElement element = new BlockElement(this.id).group(itemGroup.getSelectionModel().getSelectedItem()).model(model).texture(texture).name(customName.getCharacters().toString());
             Main.elementManager.add(element);
+            backButton.getScene().getWindow().hide();
         }
     }
 }

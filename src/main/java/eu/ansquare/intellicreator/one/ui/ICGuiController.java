@@ -47,7 +47,8 @@ public class ICGuiController extends GuiController {
                 controller.setId(elementId.getCharacters().toString());
                 // showAndWait will block execution until the window closes...
                 blockStage.showAndWait();
-
+                elementObservableList.removeAll(Main.elementManager.asCollection());
+                elementObservableList.addAll(Main.elementManager.asCollection());
             } else {
                 redId.setVisible(true);
             }

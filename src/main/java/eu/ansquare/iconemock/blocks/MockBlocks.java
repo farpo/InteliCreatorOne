@@ -11,5 +11,28 @@ public class MockBlocks {
     public static final Block OID = createBlockAndItem("oid", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
     public static final Block FD = createBlockAndItem("fd", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
 
+    public static final Block ONNOD = createBlockAndItem("onnod", new Block(QuiltBlockSettings.create()), ItemGroups.COMBAT); 
+    public static final Block RT = createBlockAndItem("rt", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block DF = createBlockAndItem("df", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block RT = createBlockAndItem("rt", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block NULL = createBlockAndItem("null", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block ERER = createBlockAndItem("erer", new Block(QuiltBlockSettings.create()), ItemGroups.COMBAT); 
+    public static final Block OID = createBlockAndItem("oid", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block ONNOD = createBlockAndItem("onnod", new Block(QuiltBlockSettings.create()), ItemGroups.COMBAT); 
+    public static final Block FD = createBlockAndItem("fd", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block DF = createBlockAndItem("df", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block RT = createBlockAndItem("rt", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block NULL = createBlockAndItem("null", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block ERER = createBlockAndItem("erer", new Block(QuiltBlockSettings.create()), ItemGroups.COMBAT); 
+    public static final Block OID = createBlockAndItem("oid", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block ONNOD = createBlockAndItem("onnod", new Block(QuiltBlockSettings.create()), ItemGroups.COMBAT); 
+    public static final Block FD = createBlockAndItem("fd", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block DF = createBlockAndItem("df", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block RT = createBlockAndItem("rt", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block NULL = createBlockAndItem("null", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block ERER = createBlockAndItem("erer", new Block(QuiltBlockSettings.create()), ItemGroups.COMBAT); 
+    public static final Block OID = createBlockAndItem("oid", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
+    public static final Block ONNOD = createBlockAndItem("onnod", new Block(QuiltBlockSettings.create()), ItemGroups.COMBAT); 
+    public static final Block FD = createBlockAndItem("fd", new Block(QuiltBlockSettings.create()), ItemGroups.BUILDING_BLOCKS); 
 
 */}

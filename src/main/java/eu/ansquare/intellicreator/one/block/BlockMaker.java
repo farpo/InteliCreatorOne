@@ -2,7 +2,6 @@ package eu.ansquare.intellicreator.one.block;
 
 import eu.ansquare.intellicreator.one.Element;
 import eu.ansquare.intellicreator.one.Main;
-import eu.ansquare.intellicreator.one.Templates;
 import eu.ansquare.intellicreator.one.template.BlockTemplates;
 import eu.ansquare.intellicreator.one.template.LangTemplates;
 import org.jetbrains.annotations.Nullable;
@@ -33,16 +32,16 @@ public class BlockMaker {
         generateBlockstate(element.ID);
         generateBlockItemModel(element.ID);
         generateLootTable(element.ID, Main.getID(), element.ID);
-        copyTextureFile(element.ID, element.texture);
+        element.texture(copyTextureFile(element.ID, element.texture));
         if(element.model.equalsIgnoreCase("default")){
-            generateBlockModel(element.ID);
+            element.model(generateBlockModel(element.ID));
         } else{
-            copyModelFile(element.ID, element.model);
+            element.model(copyModelFile(element.ID, element.model));
         }
         addToLangFile(element.ID, element.name);
         addSimpleBlockField(element.ID, element.itemGroup);
     }
-    private static void generateBlockModel(String id) {
+    private static File generateBlockModel(String id) {
         File blockModelFile = new File(Main.getAssetsPath() + "models\\block\\" + id + ".json");
         blockModelFile.getParentFile().mkdirs();
         try {
@@ -52,6 +51,7 @@ public class BlockMaker {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return blockModelFile;
     }
     private static void generateBlockstate(String id) {
         File blockstateFile = new File(Main.getAssetsPath() + "blockstates\\" + id + ".json");
@@ -86,7 +86,7 @@ public class BlockMaker {
             e.printStackTrace();
         }
     }
-    private static void copyTextureFile(String id, String texturePath){
+    private static File copyTextureFile(String id, String texturePath){
         File textureFileParent = new File(Main.getAssetsPath() + "textures\\block\\" + id + ".png").getParentFile();
         textureFileParent.mkdirs();
         try {
@@ -100,8 +100,9 @@ public class BlockMaker {
                 e.printStackTrace();
             }
         }
+        return new File(Main.getAssetsPath() + "textures\\block\\" + id + ".png");
     }
-    private static void copyModelFile(String id, String modelPath){
+    private static File copyModelFile(String id, String modelPath){
         File textureFileParent = new File(Main.getAssetsPath() + "models\\block\\" + id + ".json").getParentFile();
         textureFileParent.mkdirs();
         try {
@@ -115,6 +116,7 @@ public class BlockMaker {
                 e.printStackTrace();
             }
         }
+        return new File(Main.getAssetsPath() + "models\\block\\" + id + ".json");
     }
     private static void addToLangFile(String id, String name){
         LinkedList<String> lines = new LinkedList<>();
