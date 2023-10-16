@@ -43,11 +43,18 @@ public class ItemController extends GuiController{
     private Label redItemGroup;
     @FXML
     private Button saveButton;
+    @FXML
+    private Label idLabel;
 
     private File texture;
     private File model;
+    public void setId(String id){
+        super.setId(id);
+        idLabel.setText(this.id);
+    }
     @FXML
     private void initialize() {
+        idLabel.setText(this.id);
         redCustomName.setVisible(false);
         redModel.setVisible(false);
         redTexture.setVisible(false);

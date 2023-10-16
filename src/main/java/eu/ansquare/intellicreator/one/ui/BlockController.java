@@ -23,7 +23,8 @@ import java.nio.file.Path;
 
 public class BlockController extends GuiController{
     ObservableList<Element.ItemGroup> itemGroupObservableList = FXCollections.observableArrayList(Element.ItemGroup.values());
-
+    @FXML
+    private Label idLabel;
     @FXML
     public Button backButton;
     @FXML
@@ -49,6 +50,10 @@ public class BlockController extends GuiController{
 
     private File texture;
     private File model;
+    public void setId(String id){
+        super.setId(id);
+        idLabel.setText(this.id);
+    }
     @FXML
     private void initialize() {
         redCustomName.setVisible(false);

@@ -62,5 +62,15 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
+      <Label layoutX="558.0" layoutY="16.0" prefHeight="66.0" prefWidth="347.0" text="Block creation - " textFill="#c90076">
+         <font>
+            <Font name="System Bold" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="idLabel" layoutX="905.0" layoutY="16.0" prefHeight="66.0" prefWidth="338.0" text="c" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="45.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

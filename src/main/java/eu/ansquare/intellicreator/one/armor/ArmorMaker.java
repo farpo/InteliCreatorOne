@@ -12,33 +12,33 @@ import java.nio.file.Path;
 import java.util.LinkedList;
 
 public class ArmorMaker {
-    public static void createArmor(String name, boolean hasHelmet, boolean hasChestplate, boolean hasLeggings, boolean hasBoots,
-                                   File texture, File layer, @Nullable File helmetTexture, @Nullable File chestTexture, @Nullable File leggingsTexture, @Nullable File bootsTexture,
-                                   @Nullable String helmetName, @Nullable String chestName, @Nullable String leggingsName, @Nullable String bootsName,
-                                   String itemGroup, String durability, String protection){
-        String id = name.toLowerCase().replace(" ", "_").replace("-", "_");
-        String className = Templates.capital(id).replace("_", "");
-        createArmorClass(className, id, durability, protection);
-        copyTextureFile(id, texture.getPath());
-        copyLayer(id, layer.getPath());
-        addArmorMatField(id, className);
-        if(hasHelmet){
-            String helmetId = id + "_helmet";
-            ItemMaker.createArmorItem(helmetName, helmetId, helmetTexture.getPath(), itemGroup.toUpperCase(), "HELMET", id);
-        }
-        if(hasChestplate){
-            String chestId = id + "_chestplate";
-            ItemMaker.createArmorItem(chestName, chestId, chestTexture.getPath(), itemGroup.toUpperCase(), "CHESTPLATE", id);
-        }
-        if(hasLeggings){
-            String leggingsId = id + "_leggings";
-            ItemMaker.createArmorItem(leggingsName, leggingsId, leggingsTexture.getPath(), itemGroup.toUpperCase(), "LEGGINGS", id);
-        }
-        if(hasBoots){
-            String bootId = id + "_boots";
-            ItemMaker.createArmorItem(bootsName, bootId, bootsTexture.getPath(), itemGroup.toUpperCase(), "BOOTS", id);
-        }
-    }
+//    public static void createArmor(String name, boolean hasHelmet, boolean hasChestplate, boolean hasLeggings, boolean hasBoots,
+//                                   File texture, File layer, @Nullable File helmetTexture, @Nullable File chestTexture, @Nullable File leggingsTexture, @Nullable File bootsTexture,
+//                                   @Nullable String helmetName, @Nullable String chestName, @Nullable String leggingsName, @Nullable String bootsName,
+//                                   String itemGroup, String durability, String protection){
+//        String id = name.toLowerCase().replace(" ", "_").replace("-", "_");
+//        String className = Templates.capital(id).replace("_", "");
+//        createArmorClass(className, id, durability, protection);
+//        copyTextureFile(id, texture.getPath());
+//        copyLayer(id, layer.getPath());
+//        addArmorMatField(id, className);
+//        if(hasHelmet){
+//            String helmetId = id + "_helmet";
+//            ItemMaker.createArmorItem(helmetName, helmetId, helmetTexture.getPath(), itemGroup.toUpperCase(), "HELMET", id);
+//        }
+//        if(hasChestplate){
+//            String chestId = id + "_chestplate";
+//            ItemMaker.createArmorItem(chestName, chestId, chestTexture.getPath(), itemGroup.toUpperCase(), "CHESTPLATE", id);
+//        }
+//        if(hasLeggings){
+//            String leggingsId = id + "_leggings";
+//            ItemMaker.createArmorItem(leggingsName, leggingsId, leggingsTexture.getPath(), itemGroup.toUpperCase(), "LEGGINGS", id);
+//        }
+//        if(hasBoots){
+//            String bootId = id + "_boots";
+//            ItemMaker.createArmorItem(bootsName, bootId, bootsTexture.getPath(), itemGroup.toUpperCase(), "BOOTS", id);
+//        }
+//    }
     private static void createArmorClass(String classnameString, String id, String durability, String protection){
         String className = classnameString + "Material.java";
         File armorClassFile = new File(Main.getArmorDirectoryPath() + className);

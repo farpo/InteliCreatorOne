@@ -3,7 +3,7 @@ package eu.ansquare.intellicreator.one.block;
 import eu.ansquare.intellicreator.one.Element;
 import eu.ansquare.intellicreator.one.Main;
 import eu.ansquare.intellicreator.one.template.BlockTemplates;
-import eu.ansquare.intellicreator.one.template.LangTemplates;
+import eu.ansquare.intellicreator.one.template.Lang;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -38,7 +38,8 @@ public class BlockMaker {
         } else{
             element.model(copyModelFile(element.ID, element.model));
         }
-        addToLangFile(element.ID, element.name);
+        Lang.block(element.ID, element.name);
+        Lang.item(element.ID, element.name);
         addSimpleBlockField(element.ID, element.itemGroup);
     }
     private static File generateBlockModel(String id) {
@@ -117,42 +118,6 @@ public class BlockMaker {
             }
         }
         return new File(Main.getAssetsPath() + "models\\block\\" + id + ".json");
-    }
-    private static void addToLangFile(String id, String name){
-        LinkedList<String> lines = new LinkedList<>();
-        String blockLangString = LangTemplates.genBlockEntry(id, name);
-        String itemLangString = LangTemplates.genItemEntry(id, name);
-        String line;
-        File langFile = new File(Main.getAssetsPath() + "lang\\en_us.json");
-        try (FileInputStream inputStream = new FileInputStream(langFile)) {
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-                while ((line = reader.readLine()) != null) {
-                    lines.add(line);
-                }
-                inputStream.close();
-            } catch (IOException e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int placeToAdd = lines.size() - 2;
-        lines.add(placeToAdd, blockLangString);
-        lines.add(placeToAdd, itemLangString);
-
-        try {
-            FileWriter myWriter = new FileWriter(langFile.getAbsoluteFile());
-            for(String writtenLine : lines){
-                myWriter.write(writtenLine);
-                myWriter.write(System.lineSeparator());
-            }
-            myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
     }
     private static void addSimpleBlockField(String id, Element.ItemGroup itemgroup) {
         LinkedList<String> lines = new LinkedList<>();

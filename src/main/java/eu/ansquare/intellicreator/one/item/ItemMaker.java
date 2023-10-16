@@ -1,7 +1,11 @@
 package eu.ansquare.intellicreator.one.item;
 
+import eu.ansquare.intellicreator.one.Element;
 import eu.ansquare.intellicreator.one.Main;
 import eu.ansquare.intellicreator.one.Templates;
+import eu.ansquare.intellicreator.one.template.BlockTemplates;
+import eu.ansquare.intellicreator.one.template.ItemTemplates;
+import eu.ansquare.intellicreator.one.template.Lang;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -11,67 +15,66 @@ import java.nio.file.Path;
 import java.util.LinkedList;
 
 public class ItemMaker {
-    public static void createItem(String name, String texturePath, String itemGroup, @Nullable File model) {
-        String id = name.toLowerCase().replace(" ", "_").replace("-", "_");
-        if(model == null){
-            generateItemModel(id);
-        } else {
-            copyModel(id, model.getPath());
+
+    public static void writeItemElement(ItemElement element, boolean hasDefaultField){
+        element.texture(copyTextureFile(element.ID, element.texture));
+        if(element.model.equalsIgnoreCase("default")){
+            element.model(generateItemModel(element.ID));
+        } else{
+            element.model(copyModelFile(element.ID, element.model));
         }
-        copyFile(id, texturePath);
-        addItemField(id, itemGroup);
+        Lang.item(element.ID, element.name);
+        addSimpleItemField(element.ID, element.itemGroup);
     }
-    public static void createArmorItem(String langName, String name, String texturePath, String itemGroup, String slot, String material){
-        generateItemModel(name);
-        copyFile(name, texturePath);
-        addArmorItemField(name, itemGroup, slot, material);
-    }
-    private static void generateItemModel(String name) {
-        File itemModelFile = new File(Main.getAssetsPath() + "models\\item\\" + name + ".json");
-        itemModelFile.getParentFile().mkdirs();
-        System.out.println(itemModelFile.getAbsolutePath());
+
+    private static File copyTextureFile(String id, String texturePath){
+        File textureFileParent = new File(Main.getAssetsPath() + "textures\\item\\" + id + ".png").getParentFile();
+        textureFileParent.mkdirs();
         try {
-            FileWriter myWriter = new FileWriter(itemModelFile.getAbsoluteFile());
-            myWriter.write(Templates.parseStringForFile(Templates.itemModelTemplate, name));
-            myWriter.close();
+            Files.copy(Path.of(texturePath).toAbsolutePath(), Path.of(Main.getAssetsPath() + "textures\\item\\" + id + ".png").toAbsolutePath());
+        } catch (IOException e) {
+            if(e instanceof FileAlreadyExistsException){
+                System.out.println("Item texture already exists");
+            }
+            else {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        }
+        return new File(Main.getAssetsPath() + "textures\\item\\" + id + ".png");
+    }
+    private static File generateItemModel(String id) {
+        File itemModelFile = new File(Main.getAssetsPath() + "models\\item\\" + id + ".json");
+        itemModelFile.getParentFile().mkdirs();
+        try {
+            Files.writeString(itemModelFile.toPath(), ItemTemplates.genItemModel(id));
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return itemModelFile;
     }
-    private static void copyModel(String name, String modelPath){
-        File modelFileParent = new File(Main.getAssetsPath() + "models\\item\\" + name + ".json").getParentFile();
-        modelFileParent.mkdirs();
-        try {
-            Files.copy(Path.of(modelPath).toAbsolutePath(), Path.of(Main.getAssetsPath() + "models\\item\\" + name + ".json").toAbsolutePath());
-        } catch (IOException e) {
-            if (e instanceof FileAlreadyExistsException) {
-                System.out.println("Item model already exists");
-            } else {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
-        }
-    }
-    private static void copyFile(String name, String texturePath) {
-        File textureFileParent = new File(Main.getAssetsPath() + "textures\\item\\" + name + ".png").getParentFile();
+    private static File copyModelFile(String id, String texturePath){
+        File textureFileParent = new File(Main.getAssetsPath() + "models\\item\\" + id + ".json").getParentFile();
         textureFileParent.mkdirs();
         try {
-            Files.copy(Path.of(texturePath).toAbsolutePath(), Path.of(Main.getAssetsPath() + "textures\\item\\" + name + ".png").toAbsolutePath());
+            Files.copy(Path.of(texturePath).toAbsolutePath(), Path.of(Main.getAssetsPath() + "models\\item\\" + id + ".json").toAbsolutePath());
         } catch (IOException e) {
-            if (e instanceof FileAlreadyExistsException) {
-                System.out.println("Item texture already exists");
-            } else {
+            if(e instanceof FileAlreadyExistsException){
+                System.out.println("Item model already exists");
+            }
+            else {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
             }
         }
+        return new File(Main.getAssetsPath() + "models\\item\\" + id + ".json");
     }
-    private static void addItemField(String name, String itemgroup) {
+
+    private static void addSimpleItemField(String id, Element.ItemGroup itemgroup) {
         LinkedList<String> lines = new LinkedList<>();
-        String unmodifiedItemString = Templates.parseStringForFile(Templates.itemFieldTemplate, name);
-        String modifedItemString = Templates.parseItemSettingsForFile(unmodifiedItemString, itemgroup);
+        String field = ItemTemplates.genSimpleItemField(id, itemgroup);
         String line;
         File itemClassFile = new File(Main.getItemClassPath());
         try (FileInputStream inputStream = new FileInputStream(itemClassFile)) {
@@ -88,7 +91,7 @@ public class ItemMaker {
             e.printStackTrace();
         }
         int placeToAdd = lines.size() - 2;
-        lines.add(placeToAdd, modifedItemString);
+        lines.add(placeToAdd, field);
         try {
             FileWriter myWriter = new FileWriter(itemClassFile.getAbsoluteFile());
             for(String writtenLine : lines){
