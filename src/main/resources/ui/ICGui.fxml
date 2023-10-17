@@ -22,7 +22,7 @@
                      <font>
                         <Font size="40.0" />
                      </font></Button>
-                  <Button layoutX="340.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="A">
+                  <Button fx:id="armorButton" layoutX="340.0" layoutY="60.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="96.0" style="-fx-background-color: #ae0066;" text="A">
                      <font>
                         <Font size="40.0" />
                      </font></Button>

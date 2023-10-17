@@ -1,6 +1,8 @@
 package eu.ansquare.intellicreator.one;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.ansquare.intellicreator.one.armor.ArmorElement;
+import eu.ansquare.intellicreator.one.armor.ArmorPieceWriter;
 import eu.ansquare.intellicreator.one.block.BlockElement;
 import eu.ansquare.intellicreator.one.item.ItemElement;
 
@@ -12,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class ElementManager {
+    public ArmorPieceWriter armorPieceWriter = new ArmorPieceWriter();
     private ObjectMapper mapper;
     public final String DIRECTORY;
     public Map<String, Element> elements;
@@ -83,6 +86,9 @@ public class ElementManager {
                             break;
                         case "item":
                             element = new ItemElement(name);
+                            break;
+                        case "armor":
+                            element = new ArmorElement(name);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized type");

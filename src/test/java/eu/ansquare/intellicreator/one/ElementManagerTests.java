@@ -21,4 +21,11 @@ class ElementManagerTests {
         elementManager.write();
         elementManager.save();
     }
+    @Test
+    public void testLoadArmor(){
+        ElementManager elementManager = new ElementManager(Main.getElementPath());
+        Main.elementManager = elementManager;
+        elementManager.load();
+        System.out.println("loaded");
+    }
 }
