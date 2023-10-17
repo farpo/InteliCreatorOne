@@ -10,6 +10,6 @@ public class ItemTemplates {
     }
     public static String genSimpleItemField(String id, Element.ItemGroup itemGroup){
         String t = "    public static final Item %UPID = %METHOD(\"%ID\", new Item(new QuiltItemSettings()), ItemGroups.%ITEMGROUP); ";
-        return t.replace("%UPID", id.toUpperCase()).replace("%ID", id).replace("%ITEMGROUP", itemGroup.key()).replace("%METHOD", Main.getProperties().getProperty("itemmethod"));
+        return t.replace("%UPID", id.toUpperCase()).replace("%ID", id).replace("%ITEMGROUP", itemGroup.key().toUpperCase()).replace("%METHOD", Main.getProperties().getProperty("itemmethod"));
     }
 }
