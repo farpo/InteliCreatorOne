@@ -1,8 +1,11 @@
 package eu.ansquare.intellicreator.one.armor;
 
+import eu.ansquare.intellicreator.one.Element;
+import eu.ansquare.intellicreator.one.item.ItemElement;
 import eu.ansquare.intellicreator.one.item.ItemMaker;
 import eu.ansquare.intellicreator.one.Main;
 import eu.ansquare.intellicreator.one.Templates;
+import eu.ansquare.intellicreator.one.template.ArmorTemplates;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -39,14 +42,26 @@ public class ArmorMaker {
 //            ItemMaker.createArmorItem(bootsName, bootId, bootsTexture.getPath(), itemGroup.toUpperCase(), "BOOTS", id);
 //        }
 //    }
+    public static void writeArmorItemElement(ItemElement element, ArmorElement armor, String slot){
+        if(element != null){
+            ItemMaker.writeItemElement(element, false);
+            addArmorItemField(element.ID, element.itemGroup, slot, armor.ID);
+        }
+    }
+    public static void writeArmorElement(ArmorElement element){
+        String className = Templates.capital(element.ID) + "Material";
+        createArmorClass(className, element.ID, String.valueOf(element.durability), String.valueOf(element.protection));
+        element.texture(copyTextureFile(element.ID, element.texture), copyLayerFile(element.ID, element.texture2));
+        addArmorMatField(element.ID, className);
+    }
     private static void createArmorClass(String classnameString, String id, String durability, String protection){
-        String className = classnameString + "Material.java";
+        String className = classnameString + ".java";
         File armorClassFile = new File(Main.getArmorDirectoryPath() + className);
         armorClassFile.getParentFile().mkdirs();
         System.out.println(armorClassFile.getAbsolutePath());
         try {
             FileWriter myWriter = new FileWriter(armorClassFile.getAbsoluteFile());
-            myWriter.write(Templates.parseArmorClass(classnameString, id, durability, protection));
+            myWriter.write(ArmorTemplates.genArmorClass(durability, protection, classnameString, id));
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
@@ -54,7 +69,7 @@ public class ArmorMaker {
             e.printStackTrace();
         }
     }
-    private static void copyTextureFile(String name, String texturePath) {
+    private static File copyTextureFile(String name, String texturePath) {
         File textureFileParent = new File(Main.getArmorTexturePath() + name + "_layer_1.png").getParentFile();
         textureFileParent.mkdirs();
         try {
@@ -67,8 +82,9 @@ public class ArmorMaker {
                 e.printStackTrace();
             }
         }
+        return new File(Main.getArmorTexturePath() + name + "_layer_1.png");
     }
-    private static void copyLayer(String name, String texturePath) {
+    private static File copyLayerFile(String name, String texturePath) {
         File textureFileParent = new File(Main.getArmorTexturePath() + name + "_layer_2.png").getParentFile();
         textureFileParent.mkdirs();
         try {
@@ -81,10 +97,44 @@ public class ArmorMaker {
                 e.printStackTrace();
             }
         }
+        return new File(Main.getArmorTexturePath() + name + "_layer_2.png");
+    }
+    private static void addArmorItemField(String id, Element.ItemGroup itemgroup, String slot, String material) {
+        LinkedList<String> lines = new LinkedList<>();
+        String armorFieldString = ArmorTemplates.genArmorItemField(id, slot, itemgroup, material);
+        String line;
+        File itemClassFile = new File(Main.getItemClassPath());
+        try (FileInputStream inputStream = new FileInputStream(itemClassFile)) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                while ((line = reader.readLine()) != null) {
+                    lines.add(line);
+                }
+                inputStream.close();
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int placeToAdd = lines.size() - 2;
+        lines.add(placeToAdd, armorFieldString);
+        try {
+            FileWriter myWriter = new FileWriter(itemClassFile.getAbsoluteFile());
+            for(String writtenLine : lines){
+                myWriter.write(writtenLine);
+                myWriter.write(System.lineSeparator());
+            }
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
     private static void addArmorMatField(String id, String classname) {
         LinkedList<String> lines = new LinkedList<>();
-        String armorMatField = Templates.parseArmorMatField(id, classname);
+        String armorMatField = ArmorTemplates.genMatField(id, classname);
         String line;
         File itemClassFile = new File(Main.getItemClassPath());
         try (FileInputStream inputStream = new FileInputStream(itemClassFile)) {

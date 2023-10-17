@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "eu.ansquare"
-version = "0.1.5-SNAPSHOT"
+version = "0.1.8-SNAPSHOT"
 
 repositories {
     mavenCentral()

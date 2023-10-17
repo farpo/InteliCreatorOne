@@ -50,6 +50,6 @@ public class Main {
         return "src\\main\\java\\eu\\ansquare\\" + getProperties().getProperty("packagename") + "\\blocks\\" + getProperties().getProperty("blockclass");
     }
     public static String getArmorDirectoryPath(){
-        return "src\\main\\java\\eu\\ansquare\\" + getProperties().getProperty("packagename") + "\\items\\";
+        return "src\\main\\java\\eu\\ansquare\\" + getProperties().getProperty("packagename") + "\\items\\armor\\";
     }
 }

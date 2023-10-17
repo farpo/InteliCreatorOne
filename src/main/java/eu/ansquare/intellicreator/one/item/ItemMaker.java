@@ -18,13 +18,18 @@ public class ItemMaker {
 
     public static void writeItemElement(ItemElement element, boolean hasDefaultField){
         element.texture(copyTextureFile(element.ID, element.texture));
-        if(element.model.equalsIgnoreCase("default")){
+        if (element.model == null){
+            element.model(generateItemModel(element.ID));
+        }
+        else if(element.model.equalsIgnoreCase("default")){
             element.model(generateItemModel(element.ID));
         } else{
             element.model(copyModelFile(element.ID, element.model));
         }
         Lang.item(element.ID, element.name);
-        addSimpleItemField(element.ID, element.itemGroup);
+        if(hasDefaultField){
+            addSimpleItemField(element.ID, element.itemGroup);
+        }
     }
 
     private static File copyTextureFile(String id, String texturePath){

@@ -3,6 +3,7 @@ package eu.ansquare.intellicreator.one.armor;
 import eu.ansquare.intellicreator.one.Element;
 import eu.ansquare.intellicreator.one.Main;
 import eu.ansquare.intellicreator.one.item.ItemElement;
+import eu.ansquare.intellicreator.one.item.ItemMaker;
 import eu.ansquare.intellicreator.one.util.CollectionUtils;
 
 import java.io.File;
@@ -111,6 +112,10 @@ public class ArmorElement extends Element {
 
     @Override
     public void write() {
-
+        ArmorMaker.writeArmorElement(this);
+        ArmorMaker.writeArmorItemElement(helmet, this, "helmet");
+        ArmorMaker.writeArmorItemElement(chestplate, this, "chestplate");
+        ArmorMaker.writeArmorItemElement(leggings, this, "leggings");
+        ArmorMaker.writeArmorItemElement(boots, this, "boots");
     }
 }

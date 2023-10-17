@@ -11,10 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 public class ArmorController extends GuiController{
     ObservableList<Element.ItemGroup> itemGroupObservableList = FXCollections.observableArrayList(Element.ItemGroup.values());
@@ -105,21 +107,49 @@ public class ArmorController extends GuiController{
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select the helmet texture");
             helmetTx = fileChooser.showOpenDialog(stage);
+            if(helmetTx != null){
+                try {
+                    helmetImg.setImage(new Image(helmetTx.toURI().toURL().toString()));
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         });
         chestTexture.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select the chestplate texture");
             chestTx = fileChooser.showOpenDialog(stage);
+            if(chestTx != null){
+                try {
+                    chestImg.setImage(new Image(chestTx.toURI().toURL().toString()));
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         });
         legTexture.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select the leggings texture");
             legTx = fileChooser.showOpenDialog(stage);
+            if(legTx != null){
+                try {
+                    legsImg.setImage(new Image(legTx.toURI().toURL().toString()));
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         });
         bootsTexture.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select the boots texture");
             bootsTx = fileChooser.showOpenDialog(stage);
+            if(bootsTx != null){
+                try {
+                    bootsImg.setImage(new Image(bootsTx.toURI().toURL().toString()));
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         });
         saveButton.setOnMouseClicked(event -> save());
     }

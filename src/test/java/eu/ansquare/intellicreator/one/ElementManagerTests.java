@@ -16,7 +16,7 @@ class ElementManagerTests {
             assert false;
         }
         ElementManager elementManager = new ElementManager(Main.getElementPath());
-
+        Main.elementManager = elementManager;
         elementManager.load();
         elementManager.write();
         elementManager.save();
