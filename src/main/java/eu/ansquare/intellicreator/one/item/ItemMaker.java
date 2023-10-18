@@ -28,7 +28,7 @@ public class ItemMaker {
         }
         Lang.item(element.ID, element.name);
         if(hasDefaultField){
-            addSimpleItemField(element.ID, element.itemGroup);
+            addSimpleItemField(element.ID, element.itemGroup, element.maxAmount);
         }
     }
 
@@ -77,9 +77,9 @@ public class ItemMaker {
         return new File(Main.getAssetsPath() + "models\\item\\" + id + ".json");
     }
 
-    private static void addSimpleItemField(String id, Element.ItemGroup itemgroup) {
+    private static void addSimpleItemField(String id, Element.ItemGroup itemgroup, int amount) {
         LinkedList<String> lines = new LinkedList<>();
-        String field = ItemTemplates.genSimpleItemField(id, itemgroup);
+        String field = ItemTemplates.genSimpleItemField(id, itemgroup, amount);
         String line;
         File itemClassFile = new File(Main.getItemClassPath());
         try (FileInputStream inputStream = new FileInputStream(itemClassFile)) {
@@ -110,9 +110,8 @@ public class ItemMaker {
             e.printStackTrace();
         }
     }
-    private static void addArmorItemField(String name, String itemgroup, String slot, String material) {
+    public static void addCustomItemField(String field){
         LinkedList<String> lines = new LinkedList<>();
-        String armorFieldString = Templates.parseArmorItemField(name, itemgroup, slot, material.toUpperCase());
         String line;
         File itemClassFile = new File(Main.getItemClassPath());
         try (FileInputStream inputStream = new FileInputStream(itemClassFile)) {
@@ -129,7 +128,7 @@ public class ItemMaker {
             e.printStackTrace();
         }
         int placeToAdd = lines.size() - 2;
-        lines.add(placeToAdd, armorFieldString);
+        lines.add(placeToAdd, field);
         try {
             FileWriter myWriter = new FileWriter(itemClassFile.getAbsoluteFile());
             for(String writtenLine : lines){
@@ -143,4 +142,5 @@ public class ItemMaker {
             e.printStackTrace();
         }
     }
+
 }

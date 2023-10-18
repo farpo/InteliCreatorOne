@@ -7,10 +7,7 @@ import eu.ansquare.intellicreator.one.item.ItemElement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -45,6 +42,10 @@ public class ItemController extends GuiController{
     private Button saveButton;
     @FXML
     private Label idLabel;
+    @FXML
+    private TextField maxAmount;
+    @FXML
+    private CheckBox onHead;
 
     private File texture;
     private File model;
@@ -91,7 +92,12 @@ public class ItemController extends GuiController{
         redCustomName.setVisible(customName.getCharacters().isEmpty());
         redItemGroup.setVisible(itemGroup.getSelectionModel().getSelectedItem() == null);
         if(!redCustomName.isVisible() && !redTexture.isVisible() && !redItemGroup.isVisible()){
-            ItemElement element = new ItemElement(this.id).group(itemGroup.getSelectionModel().getSelectedItem()).model(model).texture(texture).name(customName.getCharacters().toString());
+            ItemElement element = new ItemElement(this.id)
+                    .group(itemGroup.getSelectionModel().getSelectedItem())
+                    .model(model).texture(texture)
+                    .name(customName.getCharacters().toString())
+                    .maxAmount(maxAmount.getCharacters().toString())
+                    .onHead(onHead.isSelected());
             Main.elementManager.add(element);
             backButton.getScene().getWindow().hide();
         }

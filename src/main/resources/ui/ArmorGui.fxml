@@ -49,6 +49,26 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
+            <TextField fx:id="durability" alignment="CENTER" layoutX="69.0" layoutY="351.0" prefHeight="44.0" prefWidth="112.0" promptText="Durability" style="-fx-background-color: #303030;" stylesheets="@css/whitetextstyle.css">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="protection" alignment="CENTER" layoutX="260.0" layoutY="351.0" prefHeight="44.0" prefWidth="112.0" promptText="Protection" style="-fx-background-color: #303030;" stylesheets="@css/whitetextstyle.css">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            <Label fx:id="redDur" layoutX="64.0" layoutY="403.0" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: #292929;" text="Choose the durability" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="redProt" layoutX="250.0" layoutY="403.0" prefHeight="26.0" prefWidth="132.0" style="-fx-background-color: #292929;" text="Choose the protection" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Button fx:id="backButton" layoutY="-4.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="249.0" style="-fx-background-color: #c90076;" text="Back" textFill="WHITE">

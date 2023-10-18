@@ -30,5 +30,7 @@ public class MockItems {
     public static final Item ARMORARMOR_LEGGINGS = createItem("armorarmor_leggings", new ArmorItem(ARMORARMOR, ArmorItem.ArmorSlot.LEGGINGS, new QuiltItemSettings().maxCount(1)), ItemGroups.BUILDING_BLOCKS)
     public static final Item ARMORARMOR_BOOTS = createItem("armorarmor_boots", new ArmorItem(ARMORARMOR, ArmorItem.ArmorSlot.BOOTS, new QuiltItemSettings().maxCount(1)), ItemGroups.BUILDING_BLOCKS)
     public static final ArmorMaterial ARMORARMOR = new ArmorarmorMaterial(); 
+    public static final ArmorMaterial POL = new PolMaterial(); 
+    public static final Item U = createItem("u", new Item(new QuiltItemSettings().maxCount(50).equipmentSlot(EquipmentSlot.HEAD), ItemGroups.COMBAT); 
 
 */}

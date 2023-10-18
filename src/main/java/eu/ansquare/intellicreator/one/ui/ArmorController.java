@@ -43,6 +43,14 @@ public class ArmorController extends GuiController{
     private Button saveButton;
     @FXML
     private Label idLabel;
+    @FXML
+    private TextField durability;
+    @FXML
+    private TextField protection;
+    @FXML
+    private Label redProt;
+    @FXML
+    private Label redDur;
 
     @FXML
     private Button helmetTexture;
@@ -83,10 +91,14 @@ public class ArmorController extends GuiController{
         redSTexture.setVisible(false);
         redTexture.setVisible(false);
         redItemGroup.setVisible(false);
+        redDur.setVisible(false);
+        redProt.setVisible(false);
         backButton.setOnMouseClicked(event -> backButton.getScene().getWindow().hide());
         itemGroup.setItems(itemGroupObservableList);
         itemGroup.setOnMouseClicked(event -> redItemGroup.setVisible(false));
         customName.setOnMouseClicked(event -> redCustomName.setVisible(false));
+        protection.setOnMouseClicked(event -> redProt.setVisible(false));
+        durability.setOnMouseClicked(event -> redDur.setVisible(false));
         chooseSTexture.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select the texture");
@@ -154,23 +166,30 @@ public class ArmorController extends GuiController{
         saveButton.setOnMouseClicked(event -> save());
     }
     private void save(){
+        redDur.setVisible(durability.getCharacters().isEmpty());
+        redProt.setVisible(protection.getCharacters().isEmpty());
         redTexture.setVisible(texture == null);
         redSTexture.setVisible(textureS == null);
         redCustomName.setVisible(customName.getCharacters().isEmpty());
         redItemGroup.setVisible(itemGroup.getSelectionModel().getSelectedItem() == null);
-        if(!redCustomName.isVisible() && !redTexture.isVisible() &&!redSTexture.isVisible() && !redItemGroup.isVisible()){
-            ArmorElement element = new ArmorElement(this.id).group(itemGroup.getSelectionModel().getSelectedItem()).texture(texture, textureS).name(customName.getCharacters().toString());
+        if(!redCustomName.isVisible() && !redTexture.isVisible() &&!redSTexture.isVisible() && !redItemGroup.isVisible() && !redProt.isVisible() && !redDur.isVisible()){
+            ArmorElement element = new ArmorElement(this.id)
+                    .group(itemGroup.getSelectionModel().getSelectedItem())
+                    .texture(texture, textureS)
+                    .name(customName.getCharacters().toString())
+                    .durability(Integer.parseInt(durability.getCharacters().toString()))
+                    .protection(Integer.parseInt(protection.getCharacters().toString()));
             if(helmetTx != null && !helmetName.getCharacters().isEmpty()){
-                element.helmet(new ItemElement(this.id + "_helmet").name(helmetName.getCharacters().toString()).texture(helmetTx));
+                element.helmet(new ItemElement(this.id + "_helmet").name(helmetName.getCharacters().toString()).texture(helmetTx).maxAmount(1));
             }
             if(chestTx != null && !chestplateName.getCharacters().isEmpty()){
-                element.chestplate(new ItemElement(this.id + "_chestplate").name(chestplateName.getCharacters().toString()).texture(chestTx));
+                element.chestplate(new ItemElement(this.id + "_chestplate").name(chestplateName.getCharacters().toString()).texture(chestTx).maxAmount(1));
             }
             if(legTx != null && !leggingsName.getCharacters().isEmpty()){
-                element.leggings(new ItemElement(this.id + "_leggings").name(leggingsName.getCharacters().toString()).texture(legTx));
+                element.leggings(new ItemElement(this.id + "_leggings").name(leggingsName.getCharacters().toString()).texture(legTx).maxAmount(1));
             }
             if(bootsTx != null && !bootsName.getCharacters().isEmpty()){
-                element.boots(new ItemElement(this.id + "_boots").name(bootsName.getCharacters().toString()).texture(bootsTx));
+                element.boots(new ItemElement(this.id + "_boots").name(bootsName.getCharacters().toString()).texture(bootsTx).maxAmount(1));
             }
             Main.elementManager.add(element);
             backButton.getScene().getWindow().hide();
